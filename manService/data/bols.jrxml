@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bols" language="groovy" pageWidth="820" pageHeight="39" orientation="Landscape" columnWidth="820" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8fee7459-8c52-4e7d-bc61-c0854f1478cd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLITE DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="bols" uuid="d8003133-d01d-46c0-b65f-2d17a76976cf">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLITE DB"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="id_bol" class="java.lang.Object">
+			<defaultValueExpression><![CDATA[3]]></defaultValueExpression>
+		</parameter>
+		<parameter name="id_general" class="java.lang.Object">
+			<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+		</parameter>
+		<parameter name="BOL_NUMBER" class="java.lang.Object"/>
+		<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     BILL_OF_LANDING.Bol_reference AS Bol_reference,
+     BILL_OF_LANDING.Bol_nature AS Bol_nature,
+     BILL_OF_LANDING.Bol_type_code AS Bol_type_code,
+     BILL_OF_LANDING.Place_of_loading_code AS Place_of_loading_code,
+     BILL_OF_LANDING.Place_of_unloading_code AS Place_of_unloading_code,
+     BILL_OF_LANDING.Number_of_packages AS Number_of_packages,
+     BILL_OF_LANDING.Package_type_code AS Package_type_code,
+     BILL_OF_LANDING.Gross_mass AS Gross_mass,
+     BILL_OF_LANDING.Notify_name AS Notify_name,
+     BILL_OF_LANDING.Notify_address AS Notify_address,
+	 BILL_OF_LANDING.Exporter_name AS Exporter_name,
+     BILL_OF_LANDING.Exporter_address AS Exporter_address,
+     BILL_OF_LANDING.Consignee_name AS Consignee_name,
+     BILL_OF_LANDING.Consignee_address AS Consignee_address,
+     BILL_OF_LANDING.Goods_description AS Goods_description,
+     BILL_OF_LANDING.Volume_in_cubic_meters AS Volume_in_cubic_meters,
+     BILL_OF_LANDING.Num_of_ctn_for_this_bol AS Num_of_ctn_for_this_bol,
+     BILL_OF_LANDING.id_bol AS id_bol,
+     BILL_OF_LANDING.id_general AS id_general
+FROM
+     BILL_OF_LANDING BILL_OF_LANDING
+WHERE
+     BILL_OF_LANDING.id_general = $P{id_general} AND BILL_OF_LANDING.id_bol=$P{id_bol}]]>
+		</queryString>
+		<field name="Bol_reference" class="java.lang.Object"/>
+		<field name="Bol_nature" class="java.lang.Object"/>
+		<field name="Bol_type_code" class="java.lang.Object"/>
+		<field name="Place_of_loading_code" class="java.lang.Object"/>
+		<field name="Place_of_unloading_code" class="java.lang.Object"/>
+		<field name="Number_of_packages" class="java.lang.Object"/>
+		<field name="Package_type_code" class="java.lang.Object"/>
+		<field name="Gross_mass" class="java.lang.Object"/>
+		<field name="Notify_name" class="java.lang.Object"/>
+        <field name="Notify_address" class="java.lang.Object"/>
+	  	<field name="Exporter_name" class="java.lang.Object"/>
+		<field name="Exporter_address" class="java.lang.Object"/>
+        <field name="Consignee_name" class="java.lang.Object"/>
+        <field name="Consignee_address" class="java.lang.Object"/>
+		<field name="Goods_description" class="java.lang.Object"/>
+		<field name="Volume_in_cubic_meters" class="java.lang.Object"/>
+		<field name="Num_of_ctn_for_this_bol" class="java.lang.Object"/>
+		<field name="id_bol" class="java.lang.Object"/>
+		<field name="id_general" class="java.lang.Object"/>
+	</subDataset>
+	<parameter name="id_general" class="java.lang.Object">
+		<parameterDescription><![CDATA[1]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_bol" class="java.lang.Object">
+		<defaultValueExpression><![CDATA[2]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BOL_NUMBER" class="java.lang.Object"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     BILL_OF_LANDING.Bol_reference AS Bol_reference,
+     BILL_OF_LANDING.Bol_nature AS Bol_nature,
+     BILL_OF_LANDING.Bol_type_code AS Bol_type_code,
+     BILL_OF_LANDING.Place_of_loading_code AS Place_of_loading_code,
+     BILL_OF_LANDING.Place_of_unloading_code AS Place_of_unloading_code,
+     BILL_OF_LANDING.Number_of_packages AS Number_of_packages,
+     BILL_OF_LANDING.Package_type_code AS Package_type_code,
+     BILL_OF_LANDING.Gross_mass AS Gross_mass,
+     BILL_OF_LANDING.Notify_name AS Notify_name,
+     BILL_OF_LANDING.Notify_address AS Notify_address,
+	 BILL_OF_LANDING.Exporter_name AS Exporter_name,
+     BILL_OF_LANDING.Exporter_address AS Exporter_address,
+     BILL_OF_LANDING.Consignee_name AS Consignee_name,
+     BILL_OF_LANDING.Consignee_address AS Consignee_address,
+     BILL_OF_LANDING.Goods_description AS Goods_description,
+     BILL_OF_LANDING.Volume_in_cubic_meters AS Volume_in_cubic_meters,
+     BILL_OF_LANDING.Num_of_ctn_for_this_bol AS Num_of_ctn_for_this_bol,
+     BILL_OF_LANDING.id_bol AS id_bol,
+     BILL_OF_LANDING.id_general AS id_general
+FROM
+     BILL_OF_LANDING BILL_OF_LANDING
+WHERE
+     BILL_OF_LANDING.id_general = $P{id_general} AND BILL_OF_LANDING.id_bol = $P{id_bol}]]>
+	</queryString>
+	<field name="Bol_reference" class="java.lang.Object"/>
+	<field name="Bol_nature" class="java.lang.Object"/>
+	<field name="Bol_type_code" class="java.lang.Object"/>
+	<field name="Place_of_loading_code" class="java.lang.Object"/>
+	<field name="Place_of_unloading_code" class="java.lang.Object"/>
+	<field name="Number_of_packages" class="java.lang.Object"/>
+	<field name="Package_type_code" class="java.lang.Object"/>
+	<field name="Gross_mass" class="java.lang.Object"/>
+	<field name="Notify_name" class="java.lang.Object"/>
+    <field name="Notify_address" class="java.lang.Object"/>
+	<field name="Exporter_name" class="java.lang.Object"/>
+    <field name="Exporter_address" class="java.lang.Object"/>
+    <field name="Consignee_name" class="java.lang.Object"/>
+    <field name="Consignee_address" class="java.lang.Object"/>
+	<field name="Goods_description" class="java.lang.Object"/>
+	<field name="Volume_in_cubic_meters" class="java.lang.Object"/>
+	<field name="Num_of_ctn_for_this_bol" class="java.lang.Object"/>
+	<field name="id_bol" class="java.lang.Object"/>
+	<field name="id_general" class="java.lang.Object"/>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="820" height="39" isPrintInFirstWholeBand="true" uuid="40218089-872b-4aed-bd47-efc6a645e5f8"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="bols" uuid="59c4271a-b640-4dbf-806c-425bb9f742b1">
+						<datasetParameter name="id_bol">
+							<datasetParameterExpression><![CDATA[$F{id_bol}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="id_general">
+							<datasetParameterExpression><![CDATA[$F{id_general}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="BOL_NUMBER">
+							<datasetParameterExpression><![CDATA[$P{BOL_NUMBER}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SUBREPORT_DIR">
+							<datasetParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="40" uuid="efcf54be-d52f-4ca7-8a84-2aafdf15d842">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:detailCell height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="58629c39-1e80-4e8b-899c-4a63d1d48dad">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Bol_nature}.toUpperCase()]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="0" y="10" width="40" height="13" uuid="c6b45291-873d-438c-95df-139b24561c7e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Lucida Sans" size="7" isBold="true"/>
+									<paragraph rightIndent="2"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$P{BOL_NUMBER}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="f0224473-cb27-411f-83ba-75320544a027">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="76" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="93ef71d5-820a-4e70-847c-a021062d37d4">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Place_of_loading_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="6fa26b28-9876-42b6-9d66-7c14fa606068">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="76" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="c6a1d10f-ed64-4781-b4ac-07d3da51c0d4"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Place_of_unloading_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="fcb7d9aa-465c-4b4e-8686-6b6d87c41a9b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="60" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="fc013eab-8f23-44b5-b16f-16df25c6ddf9"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Bol_reference}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<!--jr:column width="40" uuid="1d65dc4f-e806-4193-9d60-c10c4020cdb7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="a02bf8d4-317a-46e7-94f6-2eef6ec80a6a"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Bol_type_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column-->
+					<jr:column width="140" uuid="0ec6797f-b2d7-49c1-91d1-ed9acf891c97">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+								<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="140" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="eba3ceed-c4de-4682-9f2f-4cd2470a4881"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1" spacingAfter="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Goods_description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="84df1317-5455-46fe-b812-77d786615d4a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+								<reportElement  mode="Transparent" x="0" y="0" width="65" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="769c769d-21be-411b-bd1c-b2fe3432a465"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1" spacingAfter="1" />
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Consignee_name} + " \n " + $F{Consignee_address} " \n " + $F{Notify_name} " \n " + $F{Notify_address} ]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+                                        <jr:column width="64" uuid="84df1317-5455-46fe-b812-77d786615d4a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+								<reportElement  mode="Transparent" x="0" y="0" width="64" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="769c769d-21be-411b-bd1c-b2fe3432a465"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1" spacingAfter="1" />
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Exporter_name} + " \n" + $F{Exporter_address} ]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="d3465dc7-605b-48c6-9511-fc66bb6f1ea6">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="20" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="d562bbaf-0b79-4960-8197-533445287892"/>
+								<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Number_of_packages}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="20" y="0" width="20" height="26" uuid="6a913b38-5fcc-487a-aaec-1f04fe9154c8"/>
+								<textElement>
+									<font size="7"/>
+									<paragraph spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[" / "+$F{Num_of_ctn_for_this_bol}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="3e232db9-3b1c-4363-bc7c-eeb3aacbd36f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+								<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="95c91db7-bebb-469e-92f3-22db69b0acec"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Package_type_code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="fdd11f0e-1c96-4d30-ad04-c34ebe953231">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="ed4bebad-59af-49fb-90af-aec926bf306e"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Gross_mass}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="9f337d9c-cb4c-413b-8eb3-a75827c56afa">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<textField pattern="" isBlankWhenNull="false">
+								<reportElement mode="Transparent" x="0" y="0" width="40" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="035ecc1f-96a4-4a7e-a628-9facf90e6510"/>
+								<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+									<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+									<paragraph lineSpacing="Single" leftIndent="1"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Volume_in_cubic_meters}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="139" uuid="78553adf-a6ee-4f58-a3e8-ba03056899bc">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+						<jr:detailCell style="table_TD" height="39" rowSpan="1">
+							<subreport>
+								<reportElement x="0" y="0" width="139" height="39" uuid="3868fc3a-89ee-47dd-95dc-c5aac18781c1"/>
+								<subreportParameter name="id_bol">
+									<subreportParameterExpression><![CDATA[$F{id_bol}]]></subreportParameterExpression>
+								</subreportParameter>
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ctn.jasper"]]></subreportExpression>
+							</subreport>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

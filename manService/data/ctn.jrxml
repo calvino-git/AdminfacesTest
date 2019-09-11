@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ctn" language="groovy" pageWidth="139" pageHeight="13" orientation="Landscape" columnWidth="139" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f9b2a2d5-5e2e-4879-9a87-9dbb0210452f">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLITE DB"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="id_bol" class="java.lang.Object">
+		<defaultValueExpression><![CDATA[6]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     CONTAINER.id_ctn AS id_ctn,
+     CONTAINER.id_bol AS id_bol,
+     CONTAINER.Ctn_reference AS Ctn_reference,
+     CONTAINER.Number_of_packages AS Number_of_packages,
+     CONTAINER.Type_of_container AS Type_of_container,
+     CONTAINER.Empty_Full AS Empty_Full,
+     CONTAINER.Marks1 AS Marks1,
+     CONTAINER.Marks2 AS Marks2,
+     CONTAINER.Marks3 AS Marks3,
+     CONTAINER.Sealing_Party AS Sealing_Party,
+     CONTAINER.Empty_weight AS Empty_weight,
+     CONTAINER.Goods_weight AS Goods_weight
+FROM
+     CONTAINER CONTAINER
+WHERE
+CONTAINER.id_bol=$P{id_bol}]]>
+	</queryString>
+	<field name="id_ctn" class="java.lang.Object"/>
+	<field name="id_bol" class="java.lang.Object"/>
+	<field name="Ctn_reference" class="java.lang.Object"/>
+	<field name="Number_of_packages" class="java.lang.Object"/>
+	<field name="Type_of_container" class="java.lang.Object"/>
+	<field name="Empty_Full" class="java.lang.Object"/>
+	<field name="Marks1" class="java.lang.Object"/>
+	<field name="Marks2" class="java.lang.Object"/>
+	<field name="Marks3" class="java.lang.Object"/>
+	<field name="Sealing_Party" class="java.lang.Object"/>
+	<field name="Empty_weight" class="java.lang.Object"/>
+	<field name="Goods_weight" class="java.lang.Object"/>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="26" height="13" uuid="6673f3d1-54d1-46a4-9741-8307f96f4d6a"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+					<paragraph leftIndent="1" spacingBefore="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Type_of_container} + " (" + $F{Empty_Full} + ")"]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="30" y="0" width="60" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="7a2888a2-ee6b-4d00-9032-c653555b5c0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" leftIndent="1" spacingBefore="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Ctn_reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="54" height="13" uuid="ad183ee7-4a94-4071-9be8-e80f436d0202"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="6"/>
+					<paragraph leftIndent="1" spacingBefore="1"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Number_of_packages} + " / " + $F{Goods_weight}]]></textFieldExpression>
+			</textField>
+			<!--textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="109" y="0" width="30" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="80c136e2-1d74-4cd9-8b3e-19346d914a1c"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single" spacingBefore="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / " + $F{Goods_weight}]]></textFieldExpression>
+			</textField-->
+		</band>
+	</detail>
+</jasperReport>

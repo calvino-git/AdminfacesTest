@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ASYCUDAPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>jpa.beans.Escale</class>
+    <class>jpa.beans.GeneralInfo</class>
+    <class>jpa.beans.Navire</class>
+    <class>jpa.beans.Container</class>
+    <class>jpa.beans.BillOfLanding</class>
+    <class>jpa.beans.CongoTerminal</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.0.55.203:1521:cargo"/>
+      <property name="javax.persistence.jdbc.user" value="ppncargo"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="ppncargo"/>
+    </properties>
+  </persistence-unit>
+</persistence>
