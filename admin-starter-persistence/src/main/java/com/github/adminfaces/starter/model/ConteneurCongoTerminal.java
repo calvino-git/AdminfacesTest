@@ -29,25 +29,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "CONGO_TERMINAL", catalog = "", schema = "PPNCARGO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CongoTerminal.findAll", query = "SELECT c FROM CongoTerminal c")
-    , @NamedQuery(name = "CongoTerminal.findById", query = "SELECT c FROM CongoTerminal c WHERE c.id = :id")
-    , @NamedQuery(name = "CongoTerminal.findByMois", query = "SELECT c FROM CongoTerminal c WHERE c.mois = :mois")
-    , @NamedQuery(name = "CongoTerminal.findByNumCtn", query = "SELECT c FROM CongoTerminal c WHERE c.numCtn = :numCtn")
-    , @NamedQuery(name = "CongoTerminal.findByDate", query = "SELECT c FROM CongoTerminal c WHERE c.date = :date")
-    , @NamedQuery(name = "CongoTerminal.findByMouvement", query = "SELECT c FROM CongoTerminal c WHERE c.mouvement = :mouvement")
-    , @NamedQuery(name = "CongoTerminal.findByTrafic", query = "SELECT c FROM CongoTerminal c WHERE c.trafic = :trafic")
-    , @NamedQuery(name = "CongoTerminal.findByVidePlein", query = "SELECT c FROM CongoTerminal c WHERE c.videPlein = :videPlein")
-    , @NamedQuery(name = "CongoTerminal.findByIso", query = "SELECT c FROM CongoTerminal c WHERE c.iso = :iso")
-    , @NamedQuery(name = "CongoTerminal.findByTare", query = "SELECT c FROM CongoTerminal c WHERE c.tare = :tare")
-    , @NamedQuery(name = "CongoTerminal.findByExpCours", query = "SELECT c FROM CongoTerminal c WHERE c.expCours = :expCours")
-    , @NamedQuery(name = "CongoTerminal.findByEscale", query = "SELECT c FROM CongoTerminal c WHERE c.escale = :escale")
-    , @NamedQuery(name = "CongoTerminal.findByVoyage", query = "SELECT c FROM CongoTerminal c WHERE c.voyage = :voyage")
-    , @NamedQuery(name = "CongoTerminal.findByPol", query = "SELECT c FROM CongoTerminal c WHERE c.pol = :pol")
-    , @NamedQuery(name = "CongoTerminal.findByPod", query = "SELECT c FROM CongoTerminal c WHERE c.pod = :pod")
-    , @NamedQuery(name = "CongoTerminal.findByArmateur", query = "SELECT c FROM CongoTerminal c WHERE c.armateur = :armateur")
-    , @NamedQuery(name = "CongoTerminal.findByPoidsBrut", query = "SELECT c FROM CongoTerminal c WHERE c.poidsBrut = :poidsBrut")
-    , @NamedQuery(name = "CongoTerminal.findByDateArr", query = "SELECT c FROM CongoTerminal c WHERE c.dateArr = :dateArr")
-    , @NamedQuery(name = "CongoTerminal.findByDateDep", query = "SELECT c FROM CongoTerminal c WHERE c.dateDep = :dateDep")})
+    @NamedQuery(name = "ConteneurCongoTerminal.findAll", query = "SELECT c FROM ConteneurCongoTerminal c")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findById", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.id = :id")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByMois", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.mois = :mois")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByNumCtn", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.numCtn = :numCtn")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByDate", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.date = :date")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByMouvement", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.mouvement = :mouvement")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByTrafic", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.trafic = :trafic")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByVidePlein", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.videPlein = :videPlein")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByIso", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.iso = :iso")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByTare", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.tare = :tare")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByExpCours", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.expCours = :expCours")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByEscale", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.escale = :escale")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByVoyage", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.voyage = :voyage")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByPol", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.pol = :pol")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByPod", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.pod = :pod")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByArmateur", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.armateur = :armateur")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByPoidsBrut", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.poidsBrut = :poidsBrut")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByDateArr", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.dateArr = :dateArr")
+    , @NamedQuery(name = "ConteneurCongoTerminal.findByDateDep", query = "SELECT c FROM ConteneurCongoTerminal c WHERE c.dateDep = :dateDep")})
 public class ConteneurCongoTerminal  extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -288,7 +288,7 @@ public class ConteneurCongoTerminal  extends BaseEntity implements Serializable 
 
     @Override
     public String toString() {
-        return "db.CongoTerminal[ id=" + id + " ]";
+        return "db.ConteneurCongoTerminal[ id=" + id + " ]";
     }
 
     public boolean hasEscale() {

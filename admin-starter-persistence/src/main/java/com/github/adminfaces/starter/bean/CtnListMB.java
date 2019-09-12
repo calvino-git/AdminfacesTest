@@ -26,7 +26,7 @@ import com.github.adminfaces.template.exception.BusinessException;
  */
 @Named
 @ViewScoped
-public class CctListMB extends CrudMB<ConteneurCongoTerminal> implements Serializable {
+public class CtnListMB extends CrudMB<ConteneurCongoTerminal> implements Serializable {
 
     @Inject
     ConteneurService ctnService;
@@ -94,33 +94,33 @@ public class CctListMB extends CrudMB<ConteneurCongoTerminal> implements Seriali
         }
 
         String escaleParam = null;
-        if (filter.hasParam("model")) {
-            escaleParam = filter.getStringParam("model");
-        } else if (has(ctnFilter) && ctnFilter.getModel() != null) {
-            escaleParam = ctnFilter.getModel();
+        if (filter.hasParam("escale")) {
+            escaleParam = filter.getStringParam("escale");
+        } else if (has(ctnFilter) && ctnFilter.getEscale() != null) {
+            escaleParam = ctnFilter.getEscale();
         }
 
-        if (has(modelParam)) {
-            sb.append("<b>model</b>: ").append(modelParam).append(", ");
+        if (has(escaleParam)) {
+            sb.append("<b>escale</b>: ").append(escaleParam).append(", ");
         }
 
-        Double priceParam = null;
-        if (filter.hasParam("price")) {
-            priceParam = filter.getDoubleParam("price");
-        } else if (has(carFilter) && carFilter.getModel() != null) {
-            priceParam = carFilter.getPrice();
+        String dateParam = null;
+        if (filter.hasParam("date")) {
+            dateParam = filter.getStringParam("date");
+        } else if (has(ctnFilter) && ctnFilter.getEscale() != null) {
+            dateParam = ctnFilter.getDate();
         }
 
-        if (has(priceParam)) {
-            sb.append("<b>price</b>: ").append(priceParam).append(", ");
+        if (has(dateParam)) {
+            sb.append("<b>date</b>: ").append(dateParam).append(", ");
         }
 
-        if (filter.hasParam("minPrice")) {
-            sb.append("<b>").append(getMessage("label.minPrice")).append("</b>: ").append(filter.getParam("minPrice")).append(", ");
+        if (filter.hasParam("debutDate")) {
+            sb.append("<b>").append(getMessage("label.debutDate")).append("</b>: ").append(filter.getParam("debutDate")).append(", ");
         }
 
-        if (filter.hasParam("maxPrice")) {
-            sb.append("<b>").append(getMessage("label.maxPrice")).append("</b>: ").append(filter.getParam("maxPrice")).append(", ");
+        if (filter.hasParam("finDate")) {
+            sb.append("<b>").append(getMessage("label.finDate")).append("</b>: ").append(filter.getParam("finDate")).append(", ");
         }
 
         int commaIndex = sb.lastIndexOf(",");
