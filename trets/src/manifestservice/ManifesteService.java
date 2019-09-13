@@ -11,6 +11,7 @@ import static bases.Const.*;
 import bases.ManifestMethods;
 import static bases.PersistObject.manifestToDB;
 import base.PortDestination;
+import bases.FtpClient;
 import bases.PortDestination2;
 import static bases.XmlObject.AwmdsToXml;
 import dao.DbHandler;
@@ -68,7 +69,7 @@ public class ManifesteService {
     private static Awmds manifest;
     private static JasperReport jasperManiReport;
     private static FileWriter fileWriter = null;
-    private static FTPClient ftp = new FTPClient();
+    private static final FTPClient FTP = new FTPClient();
     private static Connection connection;
     private static File jrprint;
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ASYCUDAPU");
@@ -91,14 +92,14 @@ public class ManifesteService {
         File listManifest = new File(DOSSIER_MANIFEST_IN);
         File[] destXmlManifestFile = new File[2], destPdfManifestFile = new File[2];
         while (true) {
-//            if (FtpClient.connect(ftp, false)) {
-////                LOG.info("CONNECTED : " + ftp.isConnected()) ;
-//                //Recuperation des manifestes s'ils existent
-//                FtpClient.listFTPFiles(ftp, DOSSIER_FTP_IN, DOSSIER_MANIFEST_IN, DOSSIER_FTP_ARC);
-//
-//                // deconnexion au FTP DOUANE
-//                FtpClient.disconnect(ftp);
-//            }
+            if (FtpClient.connect(FTP, false)) {
+//                LOG.info("CONNECTED : " + ftp.isConnected()) ;
+                //Recuperation des manifestes s'ils existent
+                FtpClient.listFTPFiles(FTP, DOSSIER_FTP_IN, DOSSIER_MANIFEST_IN, DOSSIER_FTP_ARC);
+
+                // deconnexion au FTP DOUANE
+                FtpClient.disconnect(FTP);
+            }
             boolean mois = false;
             if (listManifest.listFiles() != null && listManifest.listFiles().length > 0) {
                 for (File manifestFile : listManifest.listFiles()) {
@@ -107,12 +108,12 @@ public class ManifesteService {
                     //Validation du fichier Manifest: renvoie 
                     manifest = ManifestMethods.validationManifest(manifestFile, isManifest, DOSSIER_MANIFEST_ERR);
 
-                    if (manifest.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDepartureCode().equals("CGPNR") && manifest.getGeneralSegment().getGeneralSegmentId().getDateOfDeparture().startsWith("2019")) {
-                        mois = true;
-                    }
-                    if (manifest.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDestinationCode().equals("CGPNR") && manifest.getGeneralSegment().getGeneralSegmentId().getDateOfArrival().startsWith("2019")) {
-                        mois = true;
-                    }
+//                    if (manifest.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDepartureCode().equals("CGPNR") && manifest.getGeneralSegment().getGeneralSegmentId().getDateOfDeparture().startsWith("2019")) {
+//                        mois = true;
+//                    }
+//                    if (manifest.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDestinationCode().equals("CGPNR") && manifest.getGeneralSegment().getGeneralSegmentId().getDateOfArrival().startsWith("2019")) {
+//                        mois = true;
+//                    }
                     mois = true;
                     if (manifest != null && mois) {
                         destXmlManifest = ManifestMethods.renameManifest(manifest, manifestFile.getName());
@@ -154,8 +155,8 @@ public class ManifesteService {
 
                             try {
                                 id_manifest = persistenceXML(manifest, destXmlManifestFile[0]);
-                                Awmds manif = getManifeste(id_manifest);
-                                AwmdsToXml(manif, destXmlManifestFile[0]);
+//                                Awmds manif = getManifeste(id_manifest);
+//                                AwmdsToXml(manif, destXmlManifestFile[0]);
                             } catch (SQLException ex) {
                                 LOG.error("Quelque chose a mal tourne du cote de la DB");
 //                                manifestFile.renameTo(new File(Config.PROPERTIES.getString("dossier.manifest.err") + manifestFile.getName()));
@@ -428,9 +429,10 @@ public class ManifesteService {
                 String depart = awmds.getGeneralSegment().getGeneralSegmentId().getDateOfDeparture();
                 awmds.getGeneralSegment().getGeneralSegmentId().setDateOfArrival("2019-07-01");
                 awmds.getGeneralSegment().getGeneralSegmentId().setDateOfDeparture("2019-07-31");
-                PortDestination.searchPortTRB(awmds, id);
+                PortDestination2.searchPortTRB(awmds);
                 awmds.getGeneralSegment().getGeneralSegmentId().setDateOfArrival(arrival);
                 awmds.getGeneralSegment().getGeneralSegmentId().setDateOfDeparture(depart);
+                id = manifestToDB(awmds, escale);
             }
         } else {
             LOG.info("===> Recherche dans le fichier de CONGO TERMINAL : " + mois);
@@ -449,7 +451,7 @@ public class ManifesteService {
 //            maniFile = new File(name);
 //            maniFile = new File(xmlFile.getAbsolutePath().substring(0, xmlFile.getAbsolutePath().length() - 4) + ".xml");
         LOG.info("===> Enregistrement du nouveau XML traité");
-//        AwmdsToXml(awmds, xmlFile);
+        AwmdsToXml(awmds, xmlFile);
 //        
         LOG.info("===========>FIN PERSISTENCE XML<===========");
         LOG.info("===========================================");
@@ -575,7 +577,6 @@ public class ManifesteService {
         sgXml.getTransportInformation().setPlaceOfTransporter(sgDb.getPlaceOfTransporter());
 
         sgXml.setLoadUnloadPlace(obj.createAwmdsGeneralSegmentLoadUnloadPlace());
-        System.out.println(sgDb.getPlaceOfDepartureCode());
         try {
             ResultSet rst = stmt.executeQuery("select code from papn_locode where libelle like '" + sgDb.getPlaceOfDepartureCode() + "'");
             if (rst.next()) {
@@ -601,7 +602,6 @@ public class ManifesteService {
         sgXml.getTotalsSegment().setTotalNumberOfPackages(sgDb.getTotalNumberOfPackages());
 
         sgXml.setTonnage(obj.createAwmdsGeneralSegmentTonnage());
-        System.out.println(sgDb.getTonnageGrossWeight());
 
         sgXml.getTonnage().setTonnageGrossWeight(sgDb.getTonnageGrossWeight());
         sgXml.getTonnage().setTonnageNetWeight(sgDb.getTonnageNetWeight());
@@ -613,21 +613,9 @@ public class ManifesteService {
     public static Awmds.BolSegment xtractBol(BillOfLanding bol, Statement stmt) {
         Awmds.BolSegment ab = obj.createAwmdsBolSegment();
         ab.setBolId(obj.createAwmdsBolSegmentBolId());
-        switch (bol.getBolNature()) {
-            case "IMP":
-                ab.getBolId().setBolNature("23");
-            case "TRBI":
-                ab.getBolId().setBolNature("28");
-            case "EXP":
-                ab.getBolId().setBolNature("22");
-            case "TRBE":
-                ab.getBolId().setBolNature("29");
-            case "TRANSIT":
-                ab.getBolId().setBolNature("24");
-            default:
-                ab.getBolId().setBolNature(bol.getBolNature());
-        }
-
+        REF.nature.entrySet().stream().filter((entry) -> (entry.getValue().equalsIgnoreCase(bol.getBolNature()))).forEachOrdered((entry) -> {
+            ab.getBolId().setBolNature(entry.getKey());
+        });
         ab.getBolId().setBolReference(bol.getBolReference());
         ab.getBolId().setBolTypeCode(bol.getBolTypeCode());
         ab.getBolId().setLineNumber(obj.createAwmdsBolSegmentBolIdLineNumber());

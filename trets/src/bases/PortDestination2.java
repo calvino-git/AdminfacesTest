@@ -68,7 +68,7 @@ public class PortDestination2 {
                                     LOG.info("Conteneur XML : POL / POD = " + ctn.getCtnReference() + " : " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode() + "/" + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
                                     bol.getLoadUnloadPlace().setPlaceOfLoadingCode(bol.getLoadUnloadPlace().getPlaceOfLoadingCode() == null ? "CGPNR" : bol.getLoadUnloadPlace().getPlaceOfLoadingCode());
                                     if (bol.getLoadUnloadPlace().getPlaceOfLoadingCode().equals("CGPNR") && ctnr.getTrafic().equals("T") && ctnr.getPol() != null) {
-                                        if (ctnr.getMouvement().equals("EMBA")) {
+                                        if (!ctnr.getPol().equals("CGPNR") && !ctnr.getPol().equals(bol.getLoadUnloadPlace().getPlaceOfUnloadingCode())) {
                                             bol.getLoadUnloadPlace().setPlaceOfLoadingCode(ctnr.getPol());
                                             isFound = true;
                                         }
@@ -80,7 +80,7 @@ public class PortDestination2 {
 //                                        LOG.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
                                     } else if (bol.getLoadUnloadPlace().getPlaceOfUnloadingCode().equals("CGPNR") && ctnr.getTrafic().equals("T") && ctnr.getPol() != null) {
                                         //bol.getLoadUnloadPlace().setPlaceOfLoadingCode(row.getCell(3).getStringCellValue());
-                                        if (ctnr.getMouvement().equals("DEBA")) {
+                                        if (!ctnr.getPod().equals("CGPNR")&& !ctnr.getPol().equals(bol.getLoadUnloadPlace().getPlaceOfLoadingCode())) {
                                             bol.getLoadUnloadPlace().setPlaceOfUnloadingCode(ctnr.getPod());
                                             isFound = true;
                                         }
