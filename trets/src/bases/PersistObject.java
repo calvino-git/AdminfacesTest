@@ -26,6 +26,21 @@ import jpa.beans.GeneralInfo;
  * @author Admin
  */
 public class PersistObject {
+    
+    public static String getPortLibelle(String portCode, Statement stmt){
+        String port = null;
+                try {
+                    ResultSet rst = stmt.executeQuery("select libelle from papn_locode where code like '" + portCode + "'");
+                    if (rst.next()) {
+                        port = rst.getString("libelle");
+                        return port;
+                    }
+                } catch (SQLException ex) {
+                    LOG.error(ex.getSQLState() + " : " + ex.getLocalizedMessage());
+                    return portCode;
+                }
+                return portCode;
+    }
 
     public static int manifestToDB(Awmds cargo, Escale escale) throws SQLException {
         Statement id = null;
@@ -37,6 +52,7 @@ public class PersistObject {
         try {
             conn = DbHandler.getDbConnection();
             id = conn.createStatement();
+            Statement stmt = conn.createStatement();
 
             try (PreparedStatement insertGen = conn.prepareStatement(QUERY_SG)) {
 
@@ -55,8 +71,9 @@ public class PersistObject {
                 insertGen.setString(11, REF.mode_trans.get(cargo.getGeneralSegment().getTransportInformation().getModeOfTransportCode()));
                 insertGen.setString(12, cargo.getGeneralSegment().getTransportInformation().getNationalityOfTransporterCode());
                 insertGen.setString(13, escale.getNumero());
-                insertGen.setString(14, REF.locode.get(cargo.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDepartureCode()));
-                insertGen.setString(15, REF.locode.get(cargo.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDestinationCode()));
+                insertGen.setString(14, getPortLibelle(cargo.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDepartureCode(), stmt));
+                insertGen.setString(15, getPortLibelle(cargo.getGeneralSegment().getLoadUnloadPlace().getPlaceOfDestinationCode(), stmt));
+
                 insertGen.setString(16, cargo.getGeneralSegment().getTransportInformation().getPlaceOfTransporter());
                 insertGen.setString(17, cargo.getGeneralSegment().getTransportInformation().getRegistrationNumberOfTransportCode());
                 insertGen.setString(18, cargo.getGeneralSegment().getTransportInformation().getShippingAgent() == null ? "" : cargo.getGeneralSegment().getTransportInformation().getShippingAgent().getShippingAgentCode());
@@ -118,8 +135,8 @@ public class PersistObject {
                         insertBol.setDouble(27, bol.getGoodsSegment().getNumOfCtnForThisBol());
                         insertBol.setDouble(28, bol.getGoodsSegment().getNumberOfPackages());
                         insertBol.setString(29, REF.pkg_table.get(bol.getGoodsSegment().getPackageTypeCode()));
-                        insertBol.setString(30, REF.locode.get(bol.getLoadUnloadPlace().getPlaceOfLoadingCode()));
-                        insertBol.setString(31, REF.locode.get(bol.getLoadUnloadPlace().getPlaceOfUnloadingCode()));
+                        insertBol.setString(30, getPortLibelle(bol.getLoadUnloadPlace().getPlaceOfLoadingCode(), stmt));
+                        insertBol.setString(31, getPortLibelle(bol.getLoadUnloadPlace().getPlaceOfUnloadingCode(), stmt));
                         insertBol.setString(32, bol.getGoodsSegment().getShippingMarks());
                         insertBol.setString(33, "");
                         insertBol.setDouble(34, 0.0);
@@ -142,7 +159,7 @@ public class PersistObject {
                                     insertCtn.setString(1, ctn.getCtnReference());
                                     insertCtn.setString(2, String.valueOf(ctn.getEmptyFull()));
                                     insertCtn.setString(3, String.valueOf(ctn.getEmptyWeight()));
-                                    insertCtn.setString(4, ctn.getGoodsWeight() == null?"":String.valueOf(ctn.getGoodsWeight()));
+                                    insertCtn.setString(4, ctn.getGoodsWeight() == null ? "" : String.valueOf(ctn.getGoodsWeight()));
 //                                    insertCtn.setInt(5, id_bol);
                                     insertCtn.setString(5, ctn.getMarks1());
                                     insertCtn.setString(6, ctn.getMarks2());
@@ -381,5 +398,5 @@ public class PersistObject {
         });
         return ctnrs;
     }
-    
+
 }

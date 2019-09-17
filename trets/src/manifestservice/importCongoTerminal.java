@@ -29,6 +29,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -42,8 +43,8 @@ public class importCongoTerminal {
     public static void main(String[] args) throws SQLException {
         File excel = new File("excel");
         XSSFWorkbook workbk;
-        Iterator rows;
-        XSSFRow row;
+
+        
 
         Connection con = DbHandler.getDbConnection();
         PreparedStatement stmt = con.prepareStatement(QUERY_CT);
@@ -70,43 +71,44 @@ public class importCongoTerminal {
                 if (listFile.getName().startsWith("~")) {
                     continue;
                 }
-
                 LOG.info(listFile.getName());
                 workbk = new XSSFWorkbook(listFile);
-                rows = workbk.getSheetAt(0).rowIterator();
+                XSSFSheet sheet = workbk.getSheet("201908");
+                Iterator rows = sheet.rowIterator();
                 DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
                 int i = 0;
                 while (rows.hasNext()) {
-                    row = (XSSFRow) rows.next();
+                    XSSFRow row = (XSSFRow) rows.next();
+                    row.forEach(cell -> LOG.info(cell.getStringCellValue()));
+                    
                     if (row.getRowNum() == 0) {
                         LOG.info(" LIGNE " + row.getRowNum());
                         continue;
                     }
-                    stmt.setInt(1, Integer.valueOf(listFile.getName().substring(0, 6)));
-                    stmt.setString(2, row.getCell(0).toString());
-                    stmt.setString(3, dateFormat.format(row.getCell(1).getDateCellValue()));
-                    stmt.setString(4, row.getCell(2).toString());
-                    stmt.setString(5, row.getCell(3).toString());
-                    stmt.setString(6, row.getCell(4).toString());
-                    stmt.setString(7, row.getCell(5).toString());
-                    stmt.setString(8, row.getCell(6).toString());
-                    stmt.setString(9, row.getCell(7).toString());
-                    stmt.setString(10, row.getCell(8).toString());
-                    LOG.info(row.getCell(9).toString());
-                    stmt.setString(11, row.getCell(9) == null ? "" : row.getCell(9).toString());
-                    stmt.setString(12, row.getCell(10) == null ? "" : row.getCell(10).toString());
-                    stmt.setString(13, row.getCell(11) == null ? "" : row.getCell(11).toString());
-                    stmt.setString(14, row.getCell(12).toString());
-                    stmt.setString(15, row.getCell(13).toString());
-                    stmt.setString(16, dateFormat.format(row.getCell(14).getDateCellValue()));
-                    stmt.setString(17, dateFormat.format(row.getCell(15).getDateCellValue()));
-                    stmt.setString(18, row.getCell(16) == null ? "" : row.getCell(10).toString());
-                    stmt.setString(19, row.getCell(17) == null ? "" : row.getCell(11).toString());
-                    if (i%1000 == 0) {
-                        System.out.print("=");
-                    }
-
-                    stmt.executeUpdate();
+//                    stmt.setInt(1, Integer.valueOf(listFile.getName().substring(0, 6)));
+//                    stmt.setString(2, row.getCell(0).toString());
+//                    stmt.setString(3, dateFormat.format(row.getCell(1).getDateCellValue()));
+//                    stmt.setString(4, row.getCell(2).toString());
+//                    stmt.setString(5, row.getCell(3).toString());
+//                    stmt.setString(6, row.getCell(4).toString());
+//                    stmt.setString(7, row.getCell(5).toString());
+//                    stmt.setString(8, row.getCell(6).toString());
+//                    stmt.setString(9, row.getCell(7).toString());
+//                    stmt.setString(10, row.getCell(8).toString());
+//                    stmt.setString(11, row.getCell(9) == null ? "" : row.getCell(9).toString());
+//                    stmt.setString(12, row.getCell(10) == null ? "" : row.getCell(10).toString());
+//                    stmt.setString(13, row.getCell(11) == null ? "" : row.getCell(11).toString());
+//                    stmt.setString(14, row.getCell(12).toString());
+//                    stmt.setString(15, row.getCell(13).toString());
+//                    stmt.setString(16, dateFormat.format(row.getCell(14).getDateCellValue()));
+//                    stmt.setString(17, dateFormat.format(row.getCell(15).getDateCellValue()));
+//                    stmt.setString(18, row.getCell(16) == null ? "" : row.getCell(10).toString());
+//                    stmt.setString(19, row.getCell(17) == null ? "" : row.getCell(11).toString());
+//                    if (i%1000 == 0) {
+//                        System.out.print("=");
+//                    }
+//
+//                    stmt.executeUpdate();
 
 //                    ct.setMois(BigInteger.valueOf(Integer.valueOf(listFile.getName().substring(0, 6))));
 //                    ct.setNumCtn(row.getCell(0).getStringCellValue());

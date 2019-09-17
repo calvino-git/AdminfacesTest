@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ctn" language="groovy" pageWidth="139" pageHeight="13" orientation="Landscape" columnWidth="139" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f9b2a2d5-5e2e-4879-9a87-9dbb0210452f">
 	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SQLITE DB"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CARGO"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="table">
 		<box>
@@ -85,14 +86,6 @@ CONTAINER.id_bol=$P{id_bol}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Number_of_packages} + " / " + $F{Goods_weight}]]></textFieldExpression>
 			</textField>
-			<!--textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="109" y="0" width="30" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="80c136e2-1d74-4cd9-8b3e-19346d914a1c"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single" spacingBefore="0"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" / " + $F{Goods_weight}]]></textFieldExpression>
-			</textField-->
 		</band>
 	</detail>
 </jasperReport>

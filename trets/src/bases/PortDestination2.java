@@ -10,6 +10,7 @@ import static bases.Const.LOG;
 import jpa.beans.CongoTerminal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -49,70 +50,58 @@ public class PortDestination2 {
 //            }
             if (bol.getBolId().getBolNature().equals("28") || bol.getBolId().getBolNature().equals("29")) {
                 LOG.info("#######################");
-                LOG.info("BOL N°" + manifest.getBolSegment().indexOf(bol) + " => REF : " + bol.getBolId().getBolReference());
+                LOG.info("BOL N°" + (manifest.getBolSegment().indexOf(bol) + 1) + " => REF : " + bol.getBolId().getBolReference());
                 LOG.info("Nature : " + ref.nature.get(bol.getBolId().getBolNature()).toUpperCase());
                 LOG.info("##############################################################");
                 date = LocalDate.parse(bol.getBolId().getBolNature().equals("28") ? manifest.getGeneralSegment().getGeneralSegmentId().getDateOfArrival().substring(0, 10) : manifest.getGeneralSegment().getGeneralSegmentId().getDateOfDeparture().substring(0, 10));
 
                 dateDeb = String.valueOf(date.minusDays(3)).replaceAll("-", "");
                 dateFin = String.valueOf(date.plusDays(3)).replaceAll("-", "");
-
+                test = 0;
                 for (Awmds.BolSegment.CtnSegment ctn : bol.getCtnSegment()) {
                     if (query != null) {
-                        listCtnr = query.setParameter("numCtn", ctn.getCtnReference()).setParameter("dateDeb", "20190701").setParameter("dateFin", "20190731").getResultList();
+                        listCtnr = query.setParameter("numCtn", ctn.getCtnReference()).setParameter("dateDeb", "20190601").setParameter("dateFin", "20190830").getResultList();
+                        LOG.info("Resultat de " + ctn.getCtnReference() + " : " + listCtnr.size());
                         if (!listCtnr.isEmpty()) {
-                            LOG.info("Resultat de " + ctn.getCtnReference() + " : " + listCtnr.size());
                             boolean isFound = false;
                             for (CongoTerminal ctnr : listCtnr) {
-                                if (ctnr.getNumCtn().equals(ctn.getCtnReference()) /*&& row.getCell(4).getRawValue().equals(manifest.getGeneralSegment().getGeneralSegmentId().getVoyageNumber())*/) {
-                                    LOG.info("Conteneur XML : POL / POD = " + ctn.getCtnReference() + " : " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode() + "/" + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
-                                    bol.getLoadUnloadPlace().setPlaceOfLoadingCode(bol.getLoadUnloadPlace().getPlaceOfLoadingCode() == null ? "CGPNR" : bol.getLoadUnloadPlace().getPlaceOfLoadingCode());
-                                    if (bol.getLoadUnloadPlace().getPlaceOfLoadingCode().equals("CGPNR") && ctnr.getTrafic().equals("T") && ctnr.getPol() != null) {
-                                        if (!ctnr.getPol().equals("CGPNR") && !ctnr.getPol().equals(bol.getLoadUnloadPlace().getPlaceOfUnloadingCode())) {
-                                            bol.getLoadUnloadPlace().setPlaceOfLoadingCode(ctnr.getPol());
-                                            isFound = true;
+//                                if (ctnr.getNumCtn().equals(ctn.getCtnReference()) /*&& row.getCell(4).getRawValue().equals(manifest.getGeneralSegment().getGeneralSegmentId().getVoyageNumber())*/) {
+                                LOG.info("Conteneur XML : POL / POD = " + listCtnr.indexOf(ctnr) + ctn.getCtnReference() + " : " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode() + "/" + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
+                                if (bol.getLoadUnloadPlace().getPlaceOfLoadingCode().equals("CGPNR") && ctnr.getTrafic().equals("T") && ctnr.getPol() != null) {
+                                    if ((!ctnr.getPol().equals("CGPNR"))) {
+                                        if ((!ctnr.getPol().equals(bol.getLoadUnloadPlace().getPlaceOfUnloadingCode()))) {
+                                            if (ctnr.getPod().equals(bol.getLoadUnloadPlace().getPlaceOfUnloadingCode())) {
+                                                bol.getLoadUnloadPlace().setPlaceOfLoadingCode(ctnr.getPol());
+                                                isFound = true;
+                                            }
                                         }
-//                                        LOG.info("PORT DEPART SYDONIA : " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode());
-//                                        LOG.info("PORT DEPART CONGO TERMINAL : " + ctnr.getPol());
-//                                        //bol.getLoadUnloadPlace().setPlaceOfUnloadingCode(row.getCell(4).getStringCellValue());
-//                                        LOG.info("PORT ARRIVE SYDONIA : " + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
-//                                        LOG.info("PORT ARRIVE CONGO TERMINAL : " + ctnr.getPod());
-//                                        LOG.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-                                    } else if (bol.getLoadUnloadPlace().getPlaceOfUnloadingCode().equals("CGPNR") && ctnr.getTrafic().equals("T") && ctnr.getPol() != null) {
-                                        //bol.getLoadUnloadPlace().setPlaceOfLoadingCode(row.getCell(3).getStringCellValue());
-                                        if (!ctnr.getPod().equals("CGPNR")&& !ctnr.getPol().equals(bol.getLoadUnloadPlace().getPlaceOfLoadingCode())) {
-                                            bol.getLoadUnloadPlace().setPlaceOfUnloadingCode(ctnr.getPod());
-                                            isFound = true;
-                                        }
-//                                        LOG.info("PORT DEPART SYDONIA : " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode());
-//                                        LOG.info("PORT DEPART CONGO TERMINAL : " + ctnr.getPol());
-//                                        //bol.getLoadUnloadPlace().setPlaceOfUnloadingCode(row.getCell(4).getStringCellValue());
-//                                        LOG.info("PORT ARRIVE SYDONIA : " + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
-//                                        LOG.info("PORT ARRIVE CONGO TERMINAL : " + ctnr.getPod());
-//                                        LOG.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-                                    } else {
-                                        LOG.info("Conteneur N° " + ctnr.getNumCtn() + " NON TROUVÉ");
                                     }
+                                } else if (bol.getLoadUnloadPlace().getPlaceOfUnloadingCode().equals("CGPNR") && ctnr.getTrafic().equals("T") && ctnr.getPol() != null) {
 
+                                    if ((!ctnr.getPod().equals("CGPNR"))) {
+                                        if ((!ctnr.getPod().equals(bol.getLoadUnloadPlace().getPlaceOfLoadingCode()))) {
+                                            if (ctnr.getPol().equals(bol.getLoadUnloadPlace().getPlaceOfLoadingCode())) {
+                                                bol.getLoadUnloadPlace().setPlaceOfUnloadingCode(ctnr.getPod());
+                                                isFound = true;
+                                            }
+                                        }
+
+                                    }
+                                } else {
+                                    LOG.info("BL  N° " + ctnr.getNumCtn() + " NON TROUVÉ");
+                                }
+                                if (isFound == true) {
                                     test = 1;
-                                }
-                                //                            LOG.info("##############################################################");
-                                if (test == 1) {
-                                    break;
-                                }
-                                if (isFound = true) {
                                     break;
                                 }
                             }
                         }
-                    } else {
-                        continue;
                     }
                     if (test == 1) {
+                        LOG.info("Bol " + bol.getBolId().getBolReference() + ": " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode() + " => " + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
                         break;
                     }
                 }
-                LOG.info("Bol " + bol.getBolId().getBolReference() + ": " + bol.getLoadUnloadPlace().getPlaceOfLoadingCode() + " => " + bol.getLoadUnloadPlace().getPlaceOfUnloadingCode());
             }
         });
     }

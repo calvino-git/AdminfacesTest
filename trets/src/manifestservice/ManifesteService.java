@@ -10,7 +10,6 @@ import asycuda.awmds.ObjectFactory;
 import static bases.Const.*;
 import bases.ManifestMethods;
 import static bases.PersistObject.manifestToDB;
-import base.PortDestination;
 import bases.FtpClient;
 import bases.PortDestination2;
 import static bases.XmlObject.AwmdsToXml;
@@ -287,6 +286,7 @@ public class ManifesteService {
         String papn = xmlFile.getName();
         getReportParameters().put("id", id);
         getReportParameters().put("papn", papn);
+        getReportParameters().put("trafic", "MANIFEST " + xmlFile.getName().substring(14, 16) + "PORT");
         getReportParameters().put("code", code);
         reportParameters.put("SUBREPORT_DIR", SUB_REPORT);
         try {
@@ -427,8 +427,8 @@ public class ManifesteService {
             } else {
                 String arrival = awmds.getGeneralSegment().getGeneralSegmentId().getDateOfArrival();
                 String depart = awmds.getGeneralSegment().getGeneralSegmentId().getDateOfDeparture();
-                awmds.getGeneralSegment().getGeneralSegmentId().setDateOfArrival("2019-07-01");
-                awmds.getGeneralSegment().getGeneralSegmentId().setDateOfDeparture("2019-07-31");
+//                awmds.getGeneralSegment().getGeneralSegmentId().setDateOfArrival("2019-07-01");
+//                awmds.getGeneralSegment().getGeneralSegmentId().setDateOfDeparture("2019-08-30");
                 PortDestination2.searchPortTRB(awmds);
                 awmds.getGeneralSegment().getGeneralSegmentId().setDateOfArrival(arrival);
                 awmds.getGeneralSegment().getGeneralSegmentId().setDateOfDeparture(depart);
