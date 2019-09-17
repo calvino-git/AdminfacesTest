@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.adminfaces</groupId>
     <artifactId>PapnManifest</artifactId>
@@ -23,9 +23,17 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <SAUCE_KEY></SAUCE_KEY>
         <version.payara>5.192</version.payara>
+        <rootdir.payara>payara</rootdir.payara>
+
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc7 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.2</version>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -229,6 +237,10 @@
                     <commandLineOptions>
                         <option>
                             <key>--autoBindHttp</key>
+                        </option>
+                        <option>
+                            <key>--rootdir</key>
+                            <value>${basedir}/${rootdir.payara}</value>
                         </option>
                         <option>
                             <key>--deploy</key>
@@ -485,12 +497,12 @@
             <name>libs-snapshot</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
-		<repository>
-			<id>prime-repo</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
     </repositories>
 
 </project>

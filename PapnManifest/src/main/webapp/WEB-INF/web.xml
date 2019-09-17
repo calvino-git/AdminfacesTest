@@ -69,4 +69,11 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     
+    <data-source>
+        <name>jdbc/ppncargo</name>
+        <class-name>oracle.jdbc.pool.OracleDataSource</class-name>
+        <url>jdbc:oracle:thin:@10.0.55.203:1521:CARGO</url>
+        <user>ppncargo</user>
+        <password>ppncargo</password>
+    </data-source>
 </web-app>
